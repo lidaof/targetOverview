@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {
-  Cell, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine
+  BarChart, Bar, Cell, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine
 } from "recharts";
 
 import myData from './atac_summary.json';
@@ -51,6 +51,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <h1>Summary</h1>
+      <BarChart width={1200} height={300} data={myData.count}
+            margin={{top: 20, right: 20, left: 40, bottom: 20}}>
+       <CartesianGrid strokeDasharray="3 3"/>
+       <XAxis type="category" dataKey='Date' name='Date' />
+       <YAxis/>
+       <Tooltip/>
+       <Legend />
+       {
+         Object.keys(colors).map((lab) => <Bar key={lab} dataKey={lab} stackId="a" fill={colors[lab]} />)
+       }
+       {/* <Bar dataKey="Bartolomei Lab" fill={colors['Bartolomei Lab']} />
+       <Bar dataKey="Biswal Lab" fill={colors['Biswal Lab']} />
+       <Bar dataKey="Dolinoy Lab" fill={colors['Dolinoy Lab']} />
+       <Bar dataKey="Mutlu Lab" fill={colors['Mutlu Lab']} /> */}
+      </BarChart>
       <h1>Useful Reads</h1>
       <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
         <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } />
@@ -176,7 +192,7 @@ class App extends Component {
         <ReferenceLine y={myData.ref.bk_ok} label={`Acceptable: ${myData.ref.bk_ok.toFixed(3)}`} stroke="red" />
       </ScatterChart>
       <hr/>
-      <p>Last Update: {myData.lastupdate}</p>
+      <p className="text-primary text-left font-italic">Last Update: {myData.lastupdate}</p>
       </div>
     );
   }
