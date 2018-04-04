@@ -10,10 +10,11 @@ const tickCount = myData.dateLabel.length;
 
 
 const colors = {
-  'Bartolomei Lab':'#d7191c',
-  'Biswal Lab':'#fdae61',
-  'Dolinoy Lab':'#abdda4',
-  'Mutlu Lab': '#2b83ba'
+  'Bartolomei Lab':'#e41a1c',
+  'Biswal Lab':'#377eb8',
+  'Dolinoy Lab':'#4daf4a',
+  'Mutlu Lab': '#984ea3',
+  'Zhibin Lab': '#ff7f00'
 };
 
 

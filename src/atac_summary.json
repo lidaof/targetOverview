@@ -6,7 +6,7 @@
         }, 
         {
             "Date": "2017-08-28", 
-            "Dolinoy Lab": 18
+            "Dolinoy Lab": 35
         }, 
         {
             "Date": "2017-09-06", 
@@ -14,11 +14,11 @@
         }, 
         {
             "Date": "2017-12-04", 
-            "Mutlu Lab": 1
+            "Mutlu Lab": 3
         }, 
         {
             "Date": "2018-01-20", 
-            "Mutlu Lab": 3
+            "Mutlu Lab": 6
         }, 
         {
             "Date": "2018-02-07", 
@@ -26,7 +26,7 @@
         }, 
         {
             "Date": "2018-02-09", 
-            "Zhibin Lab": 0
+            "Zhibin Lab": 4
         }, 
         {
             "Date": "2018-03-15", 
@@ -37,7 +37,7 @@
             "Biswal Lab": 8
         }
     ], 
-    "lastupdate": "2018-04-04 10:29:07.202800", 
+    "lastupdate": "2018-04-04 16:01:53.360239", 
     "ref": {
         "enr_s_ok": 14.625333373026626, 
         "map_ok": 27582654.194128063, 
@@ -63,7 +63,7 @@
         "2018-03-15", 
         "2018-03-21"
     ], 
-    "total": 101, 
+    "total": 127, 
     "data": [
         {
             "Useful_reads": 17096914, 
@@ -522,6 +522,210 @@
             "Lab": "Dolinoy Lab"
         }, 
         {
+            "Useful_reads": 47109002, 
+            "Raw_reads_duplication": 0.1652, 
+            "Reads_under_peaks": 0.0771, 
+            "chrM_rate": 0.0204, 
+            "Alignment_PCR_duplication": 0.105, 
+            "Background": 0.255, 
+            "Enrichment_in_promoters": 3.29, 
+            "Date": 1, 
+            "Subsampled_enrichment": 10.48, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 22253337, 
+            "Raw_reads_duplication": 0.3743, 
+            "Reads_under_peaks": 0.0699, 
+            "chrM_rate": 0.1065, 
+            "Alignment_PCR_duplication": 0.272, 
+            "Background": 0.2074, 
+            "Enrichment_in_promoters": 3.64, 
+            "Date": 1, 
+            "Subsampled_enrichment": 11.58, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 38613870, 
+            "Raw_reads_duplication": 0.1969, 
+            "Reads_under_peaks": 0.0294, 
+            "chrM_rate": 0.0163, 
+            "Alignment_PCR_duplication": 0.155, 
+            "Background": 0.3229, 
+            "Enrichment_in_promoters": 1.71, 
+            "Date": 1, 
+            "Subsampled_enrichment": 10.03, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 37821619, 
+            "Raw_reads_duplication": 0.2214, 
+            "Reads_under_peaks": 0.0517, 
+            "chrM_rate": 0.0385, 
+            "Alignment_PCR_duplication": 0.172, 
+            "Background": 0.2429, 
+            "Enrichment_in_promoters": 2.43, 
+            "Date": 1, 
+            "Subsampled_enrichment": 9.93, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 37836245, 
+            "Raw_reads_duplication": 0.277, 
+            "Reads_under_peaks": 0.0755, 
+            "chrM_rate": 0.0626, 
+            "Alignment_PCR_duplication": 0.203, 
+            "Background": 0.2154, 
+            "Enrichment_in_promoters": 3.23, 
+            "Date": 1, 
+            "Subsampled_enrichment": 10.45, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 29628239, 
+            "Raw_reads_duplication": 0.3527, 
+            "Reads_under_peaks": 0.1045, 
+            "chrM_rate": 0.0664, 
+            "Alignment_PCR_duplication": 0.294, 
+            "Background": 0.1533, 
+            "Enrichment_in_promoters": 4.55, 
+            "Date": 1, 
+            "Subsampled_enrichment": 11.65, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 33422702, 
+            "Raw_reads_duplication": 0.285, 
+            "Reads_under_peaks": 0.1076, 
+            "chrM_rate": 0.0676, 
+            "Alignment_PCR_duplication": 0.212, 
+            "Background": 0.1253, 
+            "Enrichment_in_promoters": 4.6, 
+            "Date": 1, 
+            "Subsampled_enrichment": 12.08, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 48529617, 
+            "Raw_reads_duplication": 0.2459, 
+            "Reads_under_peaks": 0.0535, 
+            "chrM_rate": 0.0377, 
+            "Alignment_PCR_duplication": 0.19, 
+            "Background": 0.3122, 
+            "Enrichment_in_promoters": 2.38, 
+            "Date": 1, 
+            "Subsampled_enrichment": 10.13, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 40824815, 
+            "Raw_reads_duplication": 0.2028, 
+            "Reads_under_peaks": 0.107, 
+            "chrM_rate": 0.0321, 
+            "Alignment_PCR_duplication": 0.143, 
+            "Background": 0.1817, 
+            "Enrichment_in_promoters": 4.34, 
+            "Date": 1, 
+            "Subsampled_enrichment": 10.58, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 40856610, 
+            "Raw_reads_duplication": 0.2271, 
+            "Reads_under_peaks": 0.0525, 
+            "chrM_rate": 0.0338, 
+            "Alignment_PCR_duplication": 0.174, 
+            "Background": 0.2663, 
+            "Enrichment_in_promoters": 2.45, 
+            "Date": 1, 
+            "Subsampled_enrichment": 9.9, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 35049890, 
+            "Raw_reads_duplication": 0.2935, 
+            "Reads_under_peaks": 0.03, 
+            "chrM_rate": 0.0392, 
+            "Alignment_PCR_duplication": 0.242, 
+            "Background": 0.3538, 
+            "Enrichment_in_promoters": 1.84, 
+            "Date": 1, 
+            "Subsampled_enrichment": 10.03, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 48681013, 
+            "Raw_reads_duplication": 0.2326, 
+            "Reads_under_peaks": 0.0591, 
+            "chrM_rate": 0.0437, 
+            "Alignment_PCR_duplication": 0.166, 
+            "Background": 0.2444, 
+            "Enrichment_in_promoters": 2.56, 
+            "Date": 1, 
+            "Subsampled_enrichment": 10.22, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 36786079, 
+            "Raw_reads_duplication": 0.2249, 
+            "Reads_under_peaks": 0.0456, 
+            "chrM_rate": 0.0331, 
+            "Alignment_PCR_duplication": 0.176, 
+            "Background": 0.2774, 
+            "Enrichment_in_promoters": 2.65, 
+            "Date": 1, 
+            "Subsampled_enrichment": 10.28, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 44735353, 
+            "Raw_reads_duplication": 0.2199, 
+            "Reads_under_peaks": 0.061, 
+            "chrM_rate": 0.0253, 
+            "Alignment_PCR_duplication": 0.165, 
+            "Background": 0.2736, 
+            "Enrichment_in_promoters": 2.7, 
+            "Date": 1, 
+            "Subsampled_enrichment": 10.08, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 44201610, 
+            "Raw_reads_duplication": 0.2658, 
+            "Reads_under_peaks": 0.0517, 
+            "chrM_rate": 0.0225, 
+            "Alignment_PCR_duplication": 0.234, 
+            "Background": 0.2968, 
+            "Enrichment_in_promoters": 2.33, 
+            "Date": 1, 
+            "Subsampled_enrichment": 9.92, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 43312458, 
+            "Raw_reads_duplication": 0.216, 
+            "Reads_under_peaks": 0.0993, 
+            "chrM_rate": 0.0279, 
+            "Alignment_PCR_duplication": 0.164, 
+            "Background": 0.1973, 
+            "Enrichment_in_promoters": 4.06, 
+            "Date": 1, 
+            "Subsampled_enrichment": 11.03, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
+            "Useful_reads": 29282835, 
+            "Raw_reads_duplication": 0.1834, 
+            "Reads_under_peaks": 0.0736, 
+            "chrM_rate": 0.0537, 
+            "Alignment_PCR_duplication": 0.101, 
+            "Background": 0.2633, 
+            "Enrichment_in_promoters": 3.33, 
+            "Date": 1, 
+            "Subsampled_enrichment": 10.69, 
+            "Lab": "Dolinoy Lab"
+        }, 
+        {
             "Useful_reads": 153773, 
             "Raw_reads_duplication": 0.9171, 
             "Reads_under_peaks": 0.1586, 
@@ -954,6 +1158,30 @@
             "Lab": "Mutlu Lab"
         }, 
         {
+            "Useful_reads": 29172258, 
+            "Raw_reads_duplication": 0.6018, 
+            "Reads_under_peaks": 0.0002, 
+            "chrM_rate": 0.0243, 
+            "Alignment_PCR_duplication": 0.677, 
+            "Background": 0.4677, 
+            "Enrichment_in_promoters": 1.97, 
+            "Date": 3, 
+            "Subsampled_enrichment": 25.34, 
+            "Lab": "Mutlu Lab"
+        }, 
+        {
+            "Useful_reads": 42487430, 
+            "Raw_reads_duplication": 0.3802, 
+            "Reads_under_peaks": 0.0021, 
+            "chrM_rate": 0.0135, 
+            "Alignment_PCR_duplication": 0.458, 
+            "Background": 0.5068, 
+            "Enrichment_in_promoters": 1.16, 
+            "Date": 3, 
+            "Subsampled_enrichment": 16.08, 
+            "Lab": "Mutlu Lab"
+        }, 
+        {
             "Useful_reads": 48865406, 
             "Raw_reads_duplication": 0.2219, 
             "Reads_under_peaks": 0.0012, 
@@ -987,6 +1215,42 @@
             "Enrichment_in_promoters": 3.72, 
             "Date": 4, 
             "Subsampled_enrichment": 10.93, 
+            "Lab": "Mutlu Lab"
+        }, 
+        {
+            "Useful_reads": 44755517, 
+            "Raw_reads_duplication": 0.2736, 
+            "Reads_under_peaks": 0.0902, 
+            "chrM_rate": 0.0787, 
+            "Alignment_PCR_duplication": 0.176, 
+            "Background": 0.1459, 
+            "Enrichment_in_promoters": 3.98, 
+            "Date": 4, 
+            "Subsampled_enrichment": 10.71, 
+            "Lab": "Mutlu Lab"
+        }, 
+        {
+            "Useful_reads": 33605909, 
+            "Raw_reads_duplication": 0.2185, 
+            "Reads_under_peaks": 0.0043, 
+            "chrM_rate": 0.0707, 
+            "Alignment_PCR_duplication": 0.105, 
+            "Background": 0.3685, 
+            "Enrichment_in_promoters": 1.38, 
+            "Date": 4, 
+            "Subsampled_enrichment": 12.24, 
+            "Lab": "Mutlu Lab"
+        }, 
+        {
+            "Useful_reads": 35964003, 
+            "Raw_reads_duplication": 0.2155, 
+            "Reads_under_peaks": 0.0055, 
+            "chrM_rate": 0.0698, 
+            "Alignment_PCR_duplication": 0.106, 
+            "Background": 0.3988, 
+            "Enrichment_in_promoters": 1.37, 
+            "Date": 4, 
+            "Subsampled_enrichment": 11.98, 
             "Lab": "Mutlu Lab"
         }, 
         {
@@ -1036,6 +1300,54 @@
             "Date": 5, 
             "Subsampled_enrichment": 17.48, 
             "Lab": "Biswal Lab"
+        }, 
+        {
+            "Useful_reads": 15318080, 
+            "Raw_reads_duplication": 0.5648, 
+            "Reads_under_peaks": 0.0658, 
+            "chrM_rate": 0.5346, 
+            "Alignment_PCR_duplication": 0.189, 
+            "Background": 0.3007, 
+            "Enrichment_in_promoters": 5.05, 
+            "Date": 6, 
+            "Subsampled_enrichment": 14.71, 
+            "Lab": "Zhibin Lab"
+        }, 
+        {
+            "Useful_reads": 25876795, 
+            "Raw_reads_duplication": 0.4088, 
+            "Reads_under_peaks": 0.0045, 
+            "chrM_rate": 0.0086, 
+            "Alignment_PCR_duplication": 0.456, 
+            "Background": 0.3949, 
+            "Enrichment_in_promoters": 1.01, 
+            "Date": 6, 
+            "Subsampled_enrichment": 47.35, 
+            "Lab": "Zhibin Lab"
+        }, 
+        {
+            "Useful_reads": 14831811, 
+            "Raw_reads_duplication": 0.6312, 
+            "Reads_under_peaks": 0.0459, 
+            "chrM_rate": 0.2923, 
+            "Alignment_PCR_duplication": 0.66, 
+            "Background": 0.2786, 
+            "Enrichment_in_promoters": 3.65, 
+            "Date": 6, 
+            "Subsampled_enrichment": 13.54, 
+            "Lab": "Zhibin Lab"
+        }, 
+        {
+            "Useful_reads": 60342432, 
+            "Raw_reads_duplication": 0.1907, 
+            "Reads_under_peaks": 0.22, 
+            "chrM_rate": 0.0568, 
+            "Alignment_PCR_duplication": 0.109, 
+            "Background": 0.0816, 
+            "Enrichment_in_promoters": 11.27, 
+            "Date": 6, 
+            "Subsampled_enrichment": 18.98, 
+            "Lab": "Zhibin Lab"
         }, 
         {
             "Useful_reads": 42977486, 
