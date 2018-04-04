@@ -26,3 +26,12 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+h1 {
+  text-align: left;
+}
+
+.list-group>li {
+  margin-top: -12px;
+  margin-bottom: -5px;
+}
