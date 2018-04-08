@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import {
-  BarChart, Bar, Cell, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine
+  BarChart, Bar, Cell, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, Brush
 } from "recharts";
-
-import myData from './atac_summary.json';
-const tickCount = myData.dateLabel.length;
+import axios from 'axios';
+//import myData from './atac_summary.json';
+//
 //console.log(myData);
 
 
@@ -17,9 +17,46 @@ const colors = {
   'Zhibin Lab': '#ff7f00'
 };
 
-
+const ATAC_SUMMARY = 'https://target.wustl.edu/dli/data_summary/atac_summary.json';
 
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      myData: {},
+      loading: true,
+      error: null
+    };
+    this.renderTooltip = this.renderTooltip.bind(this);
+  }
+
+  componentDidMount(){
+    axios.get(ATAC_SUMMARY)
+      .then((response) => this.setState({
+        myData: response.data, 
+        loading: false,
+        error: null
+      })).catch(err => {
+        // Something went wrong. Save the error in state and re-render.
+        this.setState({
+          loading: false,
+          error: err
+        });
+      });
+  }
+
+  renderLoading() {
+    return <div>Loading...</div>;
+  }
+
+  renderError() {
+    return (
+      <div>
+        Something went wrong: {this.state.error.message}
+      </div>
+    );
+  }
 
   renderTooltip(props) {
     const { active, payload } = props;
@@ -30,7 +67,7 @@ class App extends Component {
       return (
         <div>
           <ul className="list-group text-left">
-            <li className="list-group-item">Date: {myData.dateLabel[data.Date]}</li>
+            <li className="list-group-item">Date: {data['Date']}</li>
             <li className="list-group-item">Lab: <span style={{color: colors[data['Lab']]}}>{data['Lab']}</span></li>
             <li className="list-group-item">Useful reads: {data['Useful_reads']}</li>
             <li className="list-group-item">chrM rate: {data['chrM_rate']}</li>
@@ -49,12 +86,20 @@ class App extends Component {
     return null;
   }
 
-  render() {
+  renderSummary() {
+    const { error, myData } = this.state;
+    if(error) {
+      return this.renderError();
+    }
+    //const tickCount = myData.dateLabel.length;
+
     return (
+
       <div className="App">
+      
       <h1>Summary</h1>
       <BarChart width={1200} height={300} data={myData.count}
-            margin={{top: 20, right: 20, left: 40, bottom: 20}}>
+           syncId="myChart" margin={{top: 20, right: 20, left: 40, bottom: 20}}>
        <CartesianGrid strokeDasharray="3 3"/>
        <XAxis type="category" dataKey='Date' name='Date' />
        <YAxis/>
@@ -70,11 +115,11 @@ class App extends Component {
       </BarChart>
       <h1>Useful Reads</h1>
       <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } />
+        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
         <YAxis type="number" dataKey={'Useful_reads'} name='Number'/>
         <CartesianGrid />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
-        <Scatter name='useful_reads' data={myData.data} fill='#8884d8'>
+        <Scatter name='useful_reads' data={myData.data} syncId="myChart" fill='#8884d8'>
           {
             myData.data.map((entry, index) => {
               return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
@@ -85,8 +130,9 @@ class App extends Component {
         <ReferenceLine y={myData.ref.map_ok} label={`Acceptable: ${Math.round(myData.ref.map_ok)}`} stroke="red" />
       </ScatterChart>
       <h1>chrM Rate</h1>
-        <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-          <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } />
+        <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
+          {/* <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } /> */}
+          <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
           <YAxis type="number" dataKey={'chrM_rate'} name='Number'/>
           <CartesianGrid />
           <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
@@ -99,8 +145,8 @@ class App extends Component {
           </Scatter>
       </ScatterChart>
       <h1>Raw Reads Duplication</h1>
-      <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } />
+      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
+        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
         <YAxis type="number" dataKey={'Raw_reads_duplication'} name='Number'/>
         <CartesianGrid />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
@@ -113,8 +159,8 @@ class App extends Component {
         </Scatter>
       </ScatterChart>
       <h1>Alignment PCR Duplication</h1>
-      <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } />
+      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
+        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
         <YAxis type="number" dataKey={'Alignment_PCR_duplication'} name='Number'/>
         <CartesianGrid />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
@@ -129,8 +175,8 @@ class App extends Component {
         <ReferenceLine y={myData.ref.dup_ok} label={`Acceptable: ${myData.ref.dup_ok.toFixed(3)}`} stroke="red" />
       </ScatterChart>
       <h1>Reads% Under Peaks</h1>
-      <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } />
+      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
+        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
         <YAxis type="number" dataKey={'Reads_under_peaks'} name='Number'/>
         <CartesianGrid />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
@@ -145,8 +191,8 @@ class App extends Component {
         <ReferenceLine y={myData.ref.rup_ok} label={`Acceptable: ${myData.ref.rup_ok.toFixed(3)}`} stroke="red" />
       </ScatterChart>
       <h1>Enrichment in Promoters</h1>
-      <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } />
+      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
+        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
         <YAxis type="number" dataKey={'Enrichment_in_promoters'} name='Number'/>
         <CartesianGrid />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
@@ -161,8 +207,8 @@ class App extends Component {
         <ReferenceLine y={myData.ref.enr_p_ok} label={`Acceptable: ${myData.ref.enr_p_ok.toFixed(3)}`} stroke="red" />
       </ScatterChart>
       <h1>Subsampled Enrichment</h1>
-      <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } />
+      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
+        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
         <YAxis type="number" dataKey={'Subsampled_enrichment'} name='Number'/>
         <CartesianGrid />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
@@ -177,8 +223,8 @@ class App extends Component {
         <ReferenceLine y={myData.ref.enr_s_ok} label={`Acceptable: ${myData.ref.enr_s_ok.toFixed(3)}`} stroke="red" />
       </ScatterChart>
       <h1>Background</h1>
-      <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } />
+      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
+        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
         <YAxis type="number" dataKey={'Background'} name='Number'/>
         <CartesianGrid />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
@@ -194,6 +240,16 @@ class App extends Component {
       </ScatterChart>
       <hr/>
       <p className="text-primary text-left font-italic">Last Update: {myData.lastupdate}</p>
+      </div>
+    );
+  }
+
+  render() {
+    const { loading } = this.state;
+
+    return (
+      <div>
+        {loading ? this.renderLoading() : this.renderSummary()}
       </div>
     );
   }
