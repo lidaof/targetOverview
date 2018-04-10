@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {
-  BarChart, Bar, Cell, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, Brush
+  BarChart, Bar, Cell, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, Brush, PieChart, Pie, Sector
 } from "recharts";
 import axios from 'axios';
 //import myData from './atac_summary.json';
@@ -96,7 +96,31 @@ class App extends Component {
     return (
 
       <div className="App">
-      
+      <h1>Overview</h1>
+      <p className="lead text-left">Total datasets: <span className="alert alert-primary">{myData.total}</span></p>
+      <PieChart width={600} height={180}>
+        <Pie
+          data={myData.countByLab} 
+          nameKey="Lab"
+          dataKey="Count"
+          cx={200} 
+          cy={150} 
+          startAngle={180}
+          endAngle={0}
+          innerRadius={60}
+          outerRadius={80} 
+          fill="#8884d8"
+          paddingAngle={5}
+          label
+        >
+        	{
+          	myData.countByLab.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
+            })
+          }
+        </Pie>
+        <Tooltip/>
+      </PieChart>
       <h1>Summary</h1>
       <BarChart width={1200} height={300} data={myData.count}
            syncId="myChart" margin={{top: 20, right: 20, left: 40, bottom: 20}}>
