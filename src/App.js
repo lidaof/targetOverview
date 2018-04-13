@@ -14,7 +14,8 @@ const colors = {
   'Biswal Lab':'#377eb8',
   'Dolinoy Lab':'#4daf4a',
   'Mutlu Lab': '#984ea3',
-  'Zhibin Lab': '#ff7f00'
+  'Zhibin Lab': '#ff7f00',
+  'Aylor Lab': '#e7298a'
 };
 
 const ATAC_SUMMARY = 'https://target.wustl.edu/dli/data_summary/atac_summary.json';
