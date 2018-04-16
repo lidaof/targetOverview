@@ -196,8 +196,8 @@ class App extends Component {
             })
           }
         </Scatter>
-        <ReferenceLine y={myData.ref.dup_good} label={`Good: ${myData.ref.dup_good.toFixed(3)}`} stroke="darkgreen" />
-        <ReferenceLine y={myData.ref.dup_ok} label={`Acceptable: ${myData.ref.dup_ok.toFixed(3)}`} stroke="red" />
+        {/* <ReferenceLine y={myData.ref.dup_good} label={`Good: ${myData.ref.dup_good}`} stroke="darkgreen" />
+        <ReferenceLine y={myData.ref.dup_ok} label={`Acceptable: ${myData.ref.dup_ok}`} stroke="red" /> */}
       </ScatterChart>
       <h1>Reads% Under Peaks</h1>
       <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
@@ -212,8 +212,8 @@ class App extends Component {
             })
           }
         </Scatter>
-        <ReferenceLine y={myData.ref.rup_good} label={`Good: ${myData.ref.rup_good.toFixed(3)}`} stroke="darkgreen" />
-        <ReferenceLine y={myData.ref.rup_ok} label={`Acceptable: ${myData.ref.rup_ok.toFixed(3)}`} stroke="red" />
+        <ReferenceLine y={myData.ref.rup_good} label={`Good: ${myData.ref.rup_good}`} stroke="darkgreen" />
+        <ReferenceLine y={myData.ref.rup_ok} label={`Acceptable: ${myData.ref.rup_ok}`} stroke="red" />
       </ScatterChart>
       <h1>Enrichment in Promoters</h1>
       <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
@@ -228,8 +228,8 @@ class App extends Component {
             })
           }
         </Scatter>
-        <ReferenceLine y={myData.ref.enr_p_good} label={`Good: ${myData.ref.enr_p_good.toFixed(3)}`} stroke="darkgreen" />
-        <ReferenceLine y={myData.ref.enr_p_ok} label={`Acceptable: ${myData.ref.enr_p_ok.toFixed(3)}`} stroke="red" />
+        <ReferenceLine y={myData.ref.enr_p_good} label={`Good: ${myData.ref.enr_p_good}`} stroke="darkgreen" />
+        <ReferenceLine y={myData.ref.enr_p_ok} label={`Acceptable: ${myData.ref.enr_p_ok}`} stroke="red" />
       </ScatterChart>
       <h1>Subsampled Enrichment</h1>
       <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
@@ -244,8 +244,8 @@ class App extends Component {
             })
           }
         </Scatter>
-        <ReferenceLine y={myData.ref.enr_s_good} label={`Good: ${myData.ref.enr_s_good.toFixed(3)}`} stroke="darkgreen" />
-        <ReferenceLine y={myData.ref.enr_s_ok} label={`Acceptable: ${myData.ref.enr_s_ok.toFixed(3)}`} stroke="red" />
+        <ReferenceLine y={myData.ref.enr_s_good} label={`Good: ${myData.ref.enr_s_good}`} stroke="darkgreen" />
+        <ReferenceLine y={myData.ref.enr_s_ok} label={`Acceptable: ${myData.ref.enr_s_ok}`} stroke="red" />
       </ScatterChart>
       <h1>Background</h1>
       <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
@@ -260,8 +260,8 @@ class App extends Component {
             })
           }
         </Scatter>
-        <ReferenceLine y={myData.ref.bk_good} label={`Good: ${myData.ref.bk_good.toFixed(3)}`} stroke="darkgreen" />
-        <ReferenceLine y={myData.ref.bk_ok} label={`Acceptable: ${myData.ref.bk_ok.toFixed(3)}`} stroke="red" />
+        <ReferenceLine y={myData.ref.bk_good} label={`Good: ${myData.ref.bk_good}`} stroke="darkgreen" />
+        <ReferenceLine y={myData.ref.bk_ok} label={`Acceptable: ${myData.ref.bk_ok}`} stroke="red" />
       </ScatterChart>
       <hr/>
       <p className="text-primary text-left font-italic">Last Update: {myData.lastupdate}</p>
