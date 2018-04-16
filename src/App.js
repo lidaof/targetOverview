@@ -70,7 +70,7 @@ class App extends Component {
           <ul className="list-group text-left">
             <li className="list-group-item">Date: {data['Date']}</li>
             <li className="list-group-item">Lab: <span style={{color: colors[data['Lab']]}}>{data['Lab']}</span></li>
-            <li className="list-group-item">Useful reads: {data['Useful_reads']}</li>
+            <li className="list-group-item">Useful Single Ends: {data['Useful_reads']}</li>
             <li className="list-group-item">chrM rate: {data['chrM_rate']}</li>
             <li className="list-group-item">Raw reads duplication: {data['Raw_reads_duplication']}</li>
             <li className="list-group-item">Alignment PCR duplication: {data['Alignment_PCR_duplication']}</li>
