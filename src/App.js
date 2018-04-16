@@ -138,7 +138,7 @@ class App extends Component {
        <Bar dataKey="Dolinoy Lab" fill={colors['Dolinoy Lab']} />
        <Bar dataKey="Mutlu Lab" fill={colors['Mutlu Lab']} /> */}
       </BarChart>
-      <h1>Useful Reads</h1>
+      <h1>Useful Single Ends</h1>
       <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
         <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
         <YAxis type="number" dataKey={'Useful_reads'} name='Number'/>
