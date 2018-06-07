@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import {
-  BarChart, Bar, Cell, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, Brush, PieChart, Pie, Sector
+  BarChart, Bar, Cell, ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, PieChart, Pie
 } from "recharts";
 import axios from 'axios';
 //import myData from './atac_summary.json';
@@ -120,8 +120,8 @@ class App extends Component {
 
       <div className="App">
       <h1>Overview</h1>
-      <p className="lead text-left">Total datasets: <span className="alert alert-primary">{myData.total}</span></p>
-      <p></p>
+      <p className="lead text-left">Total datasets: <span className="alert alert-primary">{myData.total}</span>, datasets passed QC: <span className="alert alert-primary">{myData.passed}</span></p>
+      <p className="text-left">Outer pie represents data submitted, inner pie represents data passed QC from each lab.</p>
       <PieChart width={800} height={400}>
         <Pie
           data={myData.countByLab} 
@@ -175,6 +175,21 @@ class App extends Component {
        <Bar dataKey="Dolinoy Lab" fill={colors['Dolinoy Lab']} />
        <Bar dataKey="Mutlu Lab" fill={colors['Mutlu Lab']} /> */}
       </BarChart>
+      <h1>QC Scores</h1>
+      <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
+        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
+        <YAxis type="number" dataKey={'score'} name='Number'/>
+        <CartesianGrid />
+        <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
+        <Scatter name='score' data={myData.data} syncId="myChart" fill='#8884d8'>
+          {
+            myData.data.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
+            })
+          }
+        </Scatter>
+        <ReferenceLine y={5} label={"Passed QC"} stroke="darkgreen" />
+      </ScatterChart>
       <h1>Useful Single Ends</h1>
       <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
         <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
