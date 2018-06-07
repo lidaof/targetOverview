@@ -11,12 +11,13 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 
 const colors = {
-  'Bartolomei Lab':'#e41a1c',
-  'Biswal Lab':'#377eb8',
-  'Dolinoy Lab':'#4daf4a',
-  'Mutlu Lab': '#984ea3',
-  'Zhibin Lab': '#ff7f00',
-  'Aylor Lab': '#e7298a'
+  'Bartolomei Lab':'#1b9e77',
+  'Biswal Lab':'#d95f02',
+  'Dolinoy Lab':'#7570b3',
+  'Mutlu Lab': '#66a61e',
+  'Zhibin Lab': '#e6ab02',
+  'Aylor Lab': '#a6761d',
+  'Wang Lab': '#e7298a'
 };
 
 const ATAC_SUMMARY = 'https://target.wustl.edu/dli/data_summary/atac_summary.json';
