@@ -7,7 +7,8 @@ import axios from 'axios';
 //import myData from './atac_summary.json';
 //
 //console.log(myData);
-
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import BootstrapTable from 'react-bootstrap-table-next';
 
 const colors = {
   'Bartolomei Lab':'#e41a1c',
@@ -19,6 +20,25 @@ const colors = {
 };
 
 const ATAC_SUMMARY = 'https://target.wustl.edu/dli/data_summary/atac_summary.json';
+
+const columns = [{
+  dataField: 'Lab',
+  text: 'Lab',
+  sort: true
+}, {
+  dataField: 'Count',
+  text: 'Submitted datasets',
+  sort: true
+}, {
+  dataField: 'Passed',
+  text: 'Datasets passed QC',
+  sort: true
+}];
+
+const defaultSorted = [{
+  dataField: 'Passed',
+  order: 'desc'
+}];
 
 class App extends Component {
 
@@ -68,6 +88,7 @@ class App extends Component {
       return (
         <div>
           <ul className="list-group text-left">
+            <li className="list-group-item">Score: {data['score']}</li>
             <li className="list-group-item">Date: {data['Date']}</li>
             <li className="list-group-item">Lab: <span style={{color: colors[data['Lab']]}}>{data['Lab']}</span></li>
             <li className="list-group-item">Useful Single Ends: {data['Useful_single_ends']}</li>
@@ -99,20 +120,14 @@ class App extends Component {
       <div className="App">
       <h1>Overview</h1>
       <p className="lead text-left">Total datasets: <span className="alert alert-primary">{myData.total}</span></p>
-      <PieChart width={600} height={180}>
+      <p></p>
+      <PieChart width={800} height={400}>
         <Pie
           data={myData.countByLab} 
           nameKey="Lab"
-          dataKey="Count"
-          cx={200} 
-          cy={150} 
-          startAngle={180}
-          endAngle={0}
-          innerRadius={60}
-          outerRadius={80} 
-          fill="#8884d8"
-          paddingAngle={5}
-          label
+          dataKey="Passed"
+          cx={200} cy={200} outerRadius={60} fill="#8884d8"
+          
         >
         	{
           	myData.countByLab.map((entry, index) => {
@@ -120,8 +135,29 @@ class App extends Component {
             })
           }
         </Pie>
+        <Pie
+          data={myData.countByLab} 
+          nameKey="Lab"
+          dataKey="Count"
+          cx={200} cy={200} innerRadius={90} outerRadius={110} fill="#82ca9d"
+          label
+        >
+        	{
+          	myData.countByLab.map((entry, index) => {
+              return <Cell key={`cell2-${index}`} fill={colors[entry.Lab]} />
+            })
+          }
+        </Pie>
         <Tooltip/>
       </PieChart>
+      <div>
+          <BootstrapTable
+            keyField="Lab"
+            data={ myData.countByLab }
+            columns={ columns }
+            defaultSorted={ defaultSorted } 
+          />
+      </div>
       <h1>Summary</h1>
       <BarChart width={1200} height={300} data={myData.count}
            syncId="myChart" margin={{top: 20, right: 20, left: 40, bottom: 20}}>
