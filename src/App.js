@@ -36,6 +36,20 @@ const columns = [{
   sort: true
 }];
 
+const columns2 = [{
+  dataField: 'Tissue',
+  text: 'Tissue',
+  sort: true
+}, {
+  dataField: 'Count',
+  text: 'Submitted datasets',
+  sort: true
+}, {
+  dataField: 'Passed',
+  text: 'Datasets passed QC',
+  sort: true
+}];
+
 const defaultSorted = [{
   dataField: 'Passed',
   order: 'desc'
@@ -119,15 +133,32 @@ class App extends Component {
     return (
 
       <div className="App">
-      <h1>Overview</h1>
+      <h1>The submission summary by date from each lab</h1>
+      <BarChart width={1200} height={300} data={myData.count}
+           syncId="myChart" margin={{top: 20, right: 20, left: 40, bottom: 20}}>
+       <CartesianGrid strokeDasharray="3 3"/>
+       <XAxis type="category" dataKey='Date' name='Date' />
+       <YAxis/>
+       <Tooltip/>
+       <Legend />
+       {
+         Object.keys(colors).map((lab) => <Bar key={lab} dataKey={lab} stackId="a" fill={colors[lab]} />)
+       }
+       {/* <Bar dataKey="Bartolomei Lab" fill={colors['Bartolomei Lab']} />
+       <Bar dataKey="Biswal Lab" fill={colors['Biswal Lab']} />
+       <Bar dataKey="Dolinoy Lab" fill={colors['Dolinoy Lab']} />
+       <Bar dataKey="Mutlu Lab" fill={colors['Mutlu Lab']} /> */}
+      </BarChart>
+      <h1>QC Overview</h1>
       <p className="lead text-left">Total datasets: <span className="alert alert-primary">{myData.total}</span>, datasets passed QC: <span className="alert alert-primary">{myData.passed}</span></p>
+      <h1>Organized by Lab</h1>
       <p className="text-left">Outer pie represents data submitted, inner pie represents data passed QC from each lab.</p>
       <PieChart width={800} height={400}>
         <Pie
           data={myData.countByLab} 
           nameKey="Lab"
           dataKey="Passed"
-          cx={200} cy={200} outerRadius={60} fill="#8884d8"
+          cx={200} cy={150} outerRadius={60} fill="#8884d8"
           
         >
         	{
@@ -140,7 +171,7 @@ class App extends Component {
           data={myData.countByLab} 
           nameKey="Lab"
           dataKey="Count"
-          cx={200} cy={200} innerRadius={90} outerRadius={110} fill="#82ca9d"
+          cx={200} cy={150} innerRadius={90} outerRadius={110} fill="#82ca9d"
           label
         >
         	{
@@ -159,22 +190,35 @@ class App extends Component {
             defaultSorted={ defaultSorted } 
           />
       </div>
-      <h1>Summary</h1>
-      <BarChart width={1200} height={300} data={myData.count}
-           syncId="myChart" margin={{top: 20, right: 20, left: 40, bottom: 20}}>
-       <CartesianGrid strokeDasharray="3 3"/>
-       <XAxis type="category" dataKey='Date' name='Date' />
-       <YAxis/>
-       <Tooltip/>
-       <Legend />
-       {
-         Object.keys(colors).map((lab) => <Bar key={lab} dataKey={lab} stackId="a" fill={colors[lab]} />)
-       }
-       {/* <Bar dataKey="Bartolomei Lab" fill={colors['Bartolomei Lab']} />
-       <Bar dataKey="Biswal Lab" fill={colors['Biswal Lab']} />
-       <Bar dataKey="Dolinoy Lab" fill={colors['Dolinoy Lab']} />
-       <Bar dataKey="Mutlu Lab" fill={colors['Mutlu Lab']} /> */}
-      </BarChart>
+      <h1>Organized by Tissue</h1>
+      <p className="text-left">Outer pie represents data submitted, inner pie represents data passed QC from each tissue.</p>
+      <PieChart width={800} height={400}>
+        <Pie
+          data={myData.countByTissue} 
+          nameKey="Tissue"
+          dataKey="Passed"
+          cx={200} cy={150} outerRadius={60} fill="#8884d8"
+          
+        >
+        </Pie>
+        <Pie
+          data={myData.countByTissue} 
+          nameKey="Tissue"
+          dataKey="Count"
+          cx={200} cy={150} innerRadius={90} outerRadius={110} fill="#82ca9d"
+          label
+        >
+        </Pie>
+        <Tooltip/>
+      </PieChart>
+      <div>
+          <BootstrapTable
+            keyField="Tissue"
+            data={ myData.countByTissue }
+            columns={ columns2 }
+            defaultSorted={ defaultSorted } 
+          />
+      </div>
       <h1>QC Scores</h1>
       <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
         <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
@@ -190,6 +234,30 @@ class App extends Component {
         </Scatter>
         <ReferenceLine y={5} label={"Passed QC"} stroke="darkgreen" />
       </ScatterChart>
+      <h1>QC scores by tissue</h1>
+        {
+          Object.keys(myData.dataByTissue).map((tissue) => {
+            return (
+              <div key={tissue}>
+                <h2>{tissue}</h2>
+                <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
+                  <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
+                  <YAxis type="number" dataKey={'score'} name='Number' domain={[-5,15]} />
+                  <CartesianGrid />
+                  <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
+                  <Scatter name='score' data={myData.dataByTissue[tissue]} syncId="myChart" fill='#8884d8'>
+                    {
+                      myData.data.map((entry, index) => {
+                        return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
+                      })
+                    }
+                  </Scatter>
+                  <ReferenceLine y={5} label={"Passed QC"} stroke="darkgreen" />
+                </ScatterChart>
+              </div>
+            )
+          })
+        }
       <h1>Useful Single Ends</h1>
       <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
         <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
