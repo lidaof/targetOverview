@@ -1,63 +1,86 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 import {
-  BarChart, Bar, Cell, ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, PieChart, Pie
+  BarChart,
+  Bar,
+  Cell,
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  ZAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ReferenceLine,
+  PieChart,
+  Pie
 } from "recharts";
-import axios from 'axios';
+import axios from "axios";
 //import myData from './atac_summary.json';
 //
 //console.log(myData);
-import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
-import BootstrapTable from 'react-bootstrap-table-next';
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import BootstrapTable from "react-bootstrap-table-next";
 
 const colors = {
-  'Bartolomei Lab':'#1b9e77',
-  'Biswal Lab':'#d95f02',
-  'Dolinoy Lab':'#7570b3',
-  'Mutlu Lab': '#66a61e',
-  'Zhibin Lab': '#e6ab02',
-  'Aylor Lab': '#a6761d',
-  'Wang Lab': '#e7298a'
+  "Bartolomei Lab": "#1b9e77",
+  "Biswal Lab": "#d95f02",
+  "Dolinoy Lab": "#7570b3",
+  "Mutlu Lab": "#66a61e",
+  "Zhibin Wang Lab": "#e6ab02",
+  "Aylor Lab": "#a6761d",
+  "Wang Lab": "#e7298a"
 };
 
-const ATAC_SUMMARY = 'https://target.wustl.edu/dli/data_summary/atac_summary.json';
+const ATAC_SUMMARY =
+  "https://target.wustl.edu/dli/data_summary/atac_summary.json";
 
-const columns = [{
-  dataField: 'Lab',
-  text: 'Lab',
-  sort: true
-}, {
-  dataField: 'Count',
-  text: 'Submitted datasets',
-  sort: true
-}, {
-  dataField: 'Passed',
-  text: 'Datasets passed QC',
-  sort: true
-}];
+const columns = [
+  {
+    dataField: "Lab",
+    text: "Lab",
+    sort: true
+  },
+  {
+    dataField: "Count",
+    text: "Submitted datasets",
+    sort: true
+  },
+  {
+    dataField: "Passed",
+    text: "Datasets passed QC",
+    sort: true
+  }
+];
 
-const columns2 = [{
-  dataField: 'Tissue',
-  text: 'Tissue',
-  sort: true
-}, {
-  dataField: 'Count',
-  text: 'Submitted datasets',
-  sort: true
-}, {
-  dataField: 'Passed',
-  text: 'Datasets passed QC',
-  sort: true
-}];
+const columns2 = [
+  {
+    dataField: "Tissue",
+    text: "Tissue",
+    sort: true
+  },
+  {
+    dataField: "Count",
+    text: "Submitted datasets",
+    sort: true
+  },
+  {
+    dataField: "Passed",
+    text: "Datasets passed QC",
+    sort: true
+  }
+];
 
-const defaultSorted = [{
-  dataField: 'Passed',
-  order: 'desc'
-}];
+const defaultSorted = [
+  {
+    dataField: "Passed",
+    order: "desc"
+  }
+];
 
 class App extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       myData: {},
@@ -67,13 +90,17 @@ class App extends Component {
     this.renderTooltip = this.renderTooltip.bind(this);
   }
 
-  componentDidMount(){
-    axios.get(ATAC_SUMMARY)
-      .then((response) => this.setState({
-        myData: response.data, 
-        loading: false,
-        error: null
-      })).catch(err => {
+  componentDidMount() {
+    axios
+      .get(ATAC_SUMMARY)
+      .then(response =>
+        this.setState({
+          myData: response.data,
+          loading: false,
+          error: null
+        })
+      )
+      .catch(err => {
         // Something went wrong. Save the error in state and re-render.
         this.setState({
           loading: false,
@@ -87,11 +114,7 @@ class App extends Component {
   }
 
   renderError() {
-    return (
-      <div>
-        Something went wrong: {this.state.error.message}
-      </div>
-    );
+    return <div>Something went wrong: {this.state.error.message}</div>;
   }
 
   renderTooltip(props) {
@@ -103,19 +126,35 @@ class App extends Component {
       return (
         <div>
           <ul className="list-group text-left">
-            <li className="list-group-item">Score: {data['score']}</li>
-            <li className="list-group-item">Date: {data['Date']}</li>
-            <li className="list-group-item">Lab: <span style={{color: colors[data['Lab']]}}>{data['Lab']}</span></li>
-            <li className="list-group-item">Useful Single Ends: {data['Useful_single_ends']}</li>
-            <li className="list-group-item">chrM rate: {data['chrM_rate']}</li>
-            <li className="list-group-item">Raw reads duplication: {data['Raw_reads_duplication']}</li>
-            <li className="list-group-item">Alignment PCR duplication: {data['Alignment_PCR_duplication']}</li>
-            <li className="list-group-item">Reads% under peaks: {data['Reads_under_peaks']}</li>
-            <li className="list-group-item">Enrichment in promoters: {data['Enrichment_in_promoters']}</li>
-            <li className="list-group-item">Subsampled enrichment: {data['Subsampled_enrichment']}</li>
-            <li className="list-group-item">Background: {data['Background']}</li>
+            <li className="list-group-item">Score: {data["score"]}</li>
+            <li className="list-group-item">Date: {data["Date"]}</li>
+            <li className="list-group-item">
+              Lab:{" "}
+              <span style={{ color: colors[data["Lab"]] }}>{data["Lab"]}</span>
+            </li>
+            <li className="list-group-item">
+              Useful Single Ends: {data["Useful_single_ends"]}
+            </li>
+            <li className="list-group-item">chrM rate: {data["chrM_rate"]}</li>
+            <li className="list-group-item">
+              Raw reads duplication: {data["Raw_reads_duplication"]}
+            </li>
+            <li className="list-group-item">
+              Alignment PCR duplication: {data["Alignment_PCR_duplication"]}
+            </li>
+            <li className="list-group-item">
+              Reads% under peaks: {data["Reads_under_peaks"]}
+            </li>
+            <li className="list-group-item">
+              Enrichment in promoters: {data["Enrichment_in_promoters"]}
+            </li>
+            <li className="list-group-item">
+              Subsampled enrichment: {data["Subsampled_enrichment"]}
+            </li>
+            <li className="list-group-item">
+              Background: {data["Background"]}
+            </li>
           </ul>
-
         </div>
       );
     }
@@ -125,266 +164,498 @@ class App extends Component {
 
   renderSummary() {
     const { error, myData } = this.state;
-    if(error) {
+    if (error) {
       return this.renderError();
     }
     //const tickCount = myData.dateLabel.length;
 
     return (
-
       <div className="App">
-      <h1>The submission summary by date from each lab</h1>
-      <BarChart width={1200} height={300} data={myData.count}
-           syncId="myChart" margin={{top: 20, right: 20, left: 40, bottom: 20}}>
-       <CartesianGrid strokeDasharray="3 3"/>
-       <XAxis type="category" dataKey='Date' name='Date' />
-       <YAxis/>
-       <Tooltip/>
-       <Legend />
-       {
-         Object.keys(colors).map((lab) => <Bar key={lab} dataKey={lab} stackId="a" fill={colors[lab]} />)
-       }
-       {/* <Bar dataKey="Bartolomei Lab" fill={colors['Bartolomei Lab']} />
+        <h1>The submission summary by date from each lab</h1>
+        <BarChart
+          width={1200}
+          height={300}
+          data={myData.count}
+          syncId="myChart"
+          margin={{ top: 20, right: 20, left: 40, bottom: 20 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis type="category" dataKey="Date" name="Date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          {Object.keys(colors).map(lab => (
+            <Bar key={lab} dataKey={lab} stackId="a" fill={colors[lab]} />
+          ))}
+          {/* <Bar dataKey="Bartolomei Lab" fill={colors['Bartolomei Lab']} />
        <Bar dataKey="Biswal Lab" fill={colors['Biswal Lab']} />
        <Bar dataKey="Dolinoy Lab" fill={colors['Dolinoy Lab']} />
        <Bar dataKey="Mutlu Lab" fill={colors['Mutlu Lab']} /> */}
-      </BarChart>
-      <h1>QC Overview</h1>
-      <p className="lead text-left">Total datasets: <span className="alert alert-primary">{myData.total}</span>, datasets passed QC: <span className="alert alert-primary">{myData.passed}</span></p>
-      <h1>Organized by Lab</h1>
-      <p className="text-left">Outer pie represents data submitted, inner pie represents data passed QC from each lab.</p>
-      <PieChart width={800} height={400}>
-        <Pie
-          data={myData.countByLab} 
-          nameKey="Lab"
-          dataKey="Passed"
-          cx={200} cy={150} outerRadius={60} fill="#8884d8"
-          
-        >
-        	{
-          	myData.countByLab.map((entry, index) => {
-              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
-            })
-          }
-        </Pie>
-        <Pie
-          data={myData.countByLab} 
-          nameKey="Lab"
-          dataKey="Count"
-          cx={200} cy={150} innerRadius={90} outerRadius={110} fill="#82ca9d"
-          label
-        >
-        	{
-          	myData.countByLab.map((entry, index) => {
-              return <Cell key={`cell2-${index}`} fill={colors[entry.Lab]} />
-            })
-          }
-        </Pie>
-        <Tooltip/>
-      </PieChart>
-      <div>
+        </BarChart>
+        <h1>QC Overview</h1>
+        <p className="lead text-left">
+          Total datasets:{" "}
+          <span className="alert alert-primary">{myData.total}</span>, datasets
+          passed QC:{" "}
+          <span className="alert alert-primary">{myData.passed}</span>
+        </p>
+        <h1>Organized by Lab</h1>
+        <p className="text-left">
+          Outer pie represents data submitted, inner pie represents data passed
+          QC from each lab.
+        </p>
+        <PieChart width={800} height={400}>
+          <Pie
+            data={myData.countByLab}
+            nameKey="Lab"
+            dataKey="Passed"
+            cx={200}
+            cy={150}
+            outerRadius={60}
+            fill="#8884d8"
+          >
+            {myData.countByLab.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />;
+            })}
+          </Pie>
+          <Pie
+            data={myData.countByLab}
+            nameKey="Lab"
+            dataKey="Count"
+            cx={200}
+            cy={150}
+            innerRadius={90}
+            outerRadius={110}
+            fill="#82ca9d"
+            label
+          >
+            {myData.countByLab.map((entry, index) => {
+              return <Cell key={`cell2-${index}`} fill={colors[entry.Lab]} />;
+            })}
+          </Pie>
+          <Tooltip />
+        </PieChart>
+        <div>
           <BootstrapTable
             keyField="Lab"
-            data={ myData.countByLab }
-            columns={ columns }
-            defaultSorted={ defaultSorted } 
+            data={myData.countByLab}
+            columns={columns}
+            defaultSorted={defaultSorted}
           />
-      </div>
-      <h1>Organized by Tissue</h1>
-      <p className="text-left">Outer pie represents data submitted, inner pie represents data passed QC from each tissue.</p>
-      <PieChart width={800} height={400}>
-        <Pie
-          data={myData.countByTissue} 
-          nameKey="Tissue"
-          dataKey="Passed"
-          cx={200} cy={150} outerRadius={60} fill="#8884d8"
-          
-        >
-        </Pie>
-        <Pie
-          data={myData.countByTissue} 
-          nameKey="Tissue"
-          dataKey="Count"
-          cx={200} cy={150} innerRadius={90} outerRadius={110} fill="#82ca9d"
-          label
-        >
-        </Pie>
-        <Tooltip/>
-      </PieChart>
-      <div>
+        </div>
+        <h1>Organized by Tissue</h1>
+        <p className="text-left">
+          Outer pie represents data submitted, inner pie represents data passed
+          QC from each tissue.
+        </p>
+        <PieChart width={800} height={400}>
+          <Pie
+            data={myData.countByTissue}
+            nameKey="Tissue"
+            dataKey="Passed"
+            cx={200}
+            cy={150}
+            outerRadius={60}
+            fill="#8884d8"
+          />
+          <Pie
+            data={myData.countByTissue}
+            nameKey="Tissue"
+            dataKey="Count"
+            cx={200}
+            cy={150}
+            innerRadius={90}
+            outerRadius={110}
+            fill="#82ca9d"
+            label
+          />
+          <Tooltip />
+        </PieChart>
+        <div>
           <BootstrapTable
             keyField="Tissue"
-            data={ myData.countByTissue }
-            columns={ columns2 }
-            defaultSorted={ defaultSorted } 
+            data={myData.countByTissue}
+            columns={columns2}
+            defaultSorted={defaultSorted}
           />
-      </div>
-      <h1>QC Scores</h1>
-      <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
-        <YAxis type="number" dataKey={'score'} name='Number'/>
-        <CartesianGrid />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
-        <Scatter name='score' data={myData.data} syncId="myChart" fill='#8884d8'>
-          {
-            myData.data.map((entry, index) => {
-              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
-            })
-          }
-        </Scatter>
-        <ReferenceLine y={5} label={"Passed QC"} stroke="darkgreen" />
-      </ScatterChart>
-      <h1>QC scores by tissue</h1>
-        {
-          Object.keys(myData.dataByTissue).map((tissue) => {
-            return (
-              <div key={tissue}>
-                <h2>{tissue}</h2>
-                <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-                  <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
-                  <YAxis type="number" dataKey={'score'} name='Number' domain={[-5,15]} />
-                  <CartesianGrid />
-                  <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
-                  <Scatter name='score' data={myData.dataByTissue[tissue]} syncId="myChart" fill='#8884d8'>
-                    {
-                      myData.data.map((entry, index) => {
-                        return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
-                      })
-                    }
-                  </Scatter>
-                  <ReferenceLine y={5} label={"Passed QC"} stroke="darkgreen" />
-                </ScatterChart>
-              </div>
-            )
-          })
-        }
-      <h1>Useful Single Ends</h1>
-      <ScatterChart width={1200} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
-        <YAxis type="number" dataKey={'Useful_single_ends'} name='Number'/>
-        <CartesianGrid />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
-        <Scatter name='Useful_single_ends' data={myData.data} syncId="myChart" fill='#8884d8'>
-          {
-            myData.data.map((entry, index) => {
-              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
-            })
-          }
-        </Scatter>
-        <ReferenceLine y={myData.ref.map_good} label={`Good: ${Math.round(myData.ref.map_good)}`} stroke="darkgreen" />
-        <ReferenceLine y={myData.ref.map_ok} label={`Acceptable: ${Math.round(myData.ref.map_ok)}`} stroke="red" />
-      </ScatterChart>
-      <h1>chrM Rate</h1>
-        <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-          {/* <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } /> */}
-          <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
-          <YAxis type="number" dataKey={'chrM_rate'} name='Number'/>
+        </div>
+        <h1>QC Scores</h1>
+        <ScatterChart
+          width={1200}
+          height={400}
+          margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+        >
+          <XAxis
+            type="category"
+            dataKey="Date"
+            name="Date"
+            allowDuplicatedCategory={false}
+          />
+          <YAxis type="number" dataKey={"score"} name="Number" />
           <CartesianGrid />
-          <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
-          <Scatter name='chrM_rate' data={myData.data} fill='#8884d8'>
-            {
-              myData.data.map((entry, index) => {
-                return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
-              })
-            }
+          <Tooltip
+            cursor={{ strokeDasharray: "3 3" }}
+            wrapperStyle={{ zIndex: 100 }}
+            content={this.renderTooltip}
+          />
+          <Scatter
+            name="score"
+            data={myData.data}
+            syncId="myChart"
+            fill="#8884d8"
+          >
+            {myData.data.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />;
+            })}
           </Scatter>
-      </ScatterChart>
-      <h1>Raw Reads Duplication</h1>
-      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
-        <YAxis type="number" dataKey={'Raw_reads_duplication'} name='Number'/>
-        <CartesianGrid />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
-        <Scatter name='Raw_reads_duplication' data={myData.data} fill='#8884d8'>
-          {
-            myData.data.map((entry, index) => {
-              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
-            })
-          }
-        </Scatter>
-      </ScatterChart>
-      <h1>Alignment PCR Duplication</h1>
-      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
-        <YAxis type="number" dataKey={'Alignment_PCR_duplication'} name='Number'/>
-        <CartesianGrid />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
-        <Scatter name='Alignment_PCR_duplication' data={myData.data} fill='#8884d8'>
-          {
-            myData.data.map((entry, index) => {
-              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
-            })
-          }
-        </Scatter>
-        {/* <ReferenceLine y={myData.ref.dup_good} label={`Good: ${myData.ref.dup_good}`} stroke="darkgreen" />
+          <ReferenceLine y={5} label={"Passed QC"} stroke="darkgreen" />
+        </ScatterChart>
+        <h1>QC scores by tissue</h1>
+        {Object.keys(myData.dataByTissue).map(tissue => {
+          return (
+            <div key={tissue}>
+              <h2>{tissue}</h2>
+              <ScatterChart
+                width={1200}
+                height={400}
+                margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+              >
+                <XAxis
+                  type="category"
+                  dataKey="Date"
+                  name="Date"
+                  allowDuplicatedCategory={false}
+                />
+                <YAxis
+                  type="number"
+                  dataKey={"score"}
+                  name="Number"
+                  domain={[-5, 15]}
+                />
+                <CartesianGrid />
+                <Tooltip
+                  cursor={{ strokeDasharray: "3 3" }}
+                  wrapperStyle={{ zIndex: 100 }}
+                  content={this.renderTooltip}
+                />
+                <Scatter
+                  name="score"
+                  data={myData.dataByTissue[tissue]}
+                  syncId="myChart"
+                  fill="#8884d8"
+                >
+                  {myData.dataByTissue[tissue].map((entry, index) => {
+                    return (
+                      <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
+                    );
+                  })}
+                </Scatter>
+                <ReferenceLine y={5} label={"Passed QC"} stroke="darkgreen" />
+              </ScatterChart>
+            </div>
+          );
+        })}
+        <h1>Useful Single Ends</h1>
+        <ScatterChart
+          width={1200}
+          height={400}
+          margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+        >
+          <XAxis
+            type="category"
+            dataKey="Date"
+            name="Date"
+            allowDuplicatedCategory={false}
+          />
+          <YAxis type="number" dataKey={"Useful_single_ends"} name="Number" />
+          <CartesianGrid />
+          <Tooltip
+            cursor={{ strokeDasharray: "3 3" }}
+            wrapperStyle={{ zIndex: 100 }}
+            content={this.renderTooltip}
+          />
+          <Scatter
+            name="Useful_single_ends"
+            data={myData.data}
+            syncId="myChart"
+            fill="#8884d8"
+          >
+            {myData.data.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />;
+            })}
+          </Scatter>
+          <ReferenceLine
+            y={myData.ref.map_good}
+            label={`Good: ${Math.round(myData.ref.map_good)}`}
+            stroke="darkgreen"
+          />
+          <ReferenceLine
+            y={myData.ref.map_ok}
+            label={`Acceptable: ${Math.round(myData.ref.map_ok)}`}
+            stroke="red"
+          />
+        </ScatterChart>
+        <h1>chrM Rate</h1>
+        <ScatterChart
+          width={1200}
+          height={400}
+          syncId="myChart"
+          margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+        >
+          {/* <XAxis type="number" dataKey='Date' name='Date' tickCount={tickCount} tickFormatter={(tick) => myData.dateLabel[tick] } /> */}
+          <XAxis
+            type="category"
+            dataKey="Date"
+            name="Date"
+            allowDuplicatedCategory={false}
+          />
+          <YAxis type="number" dataKey={"chrM_rate"} name="Number" />
+          <CartesianGrid />
+          <Tooltip
+            cursor={{ strokeDasharray: "3 3" }}
+            wrapperStyle={{ zIndex: 100 }}
+            content={this.renderTooltip}
+          />
+          <Scatter name="chrM_rate" data={myData.data} fill="#8884d8">
+            {myData.data.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />;
+            })}
+          </Scatter>
+        </ScatterChart>
+        <h1>Raw Reads Duplication</h1>
+        <ScatterChart
+          width={1200}
+          height={400}
+          syncId="myChart"
+          margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+        >
+          <XAxis
+            type="category"
+            dataKey="Date"
+            name="Date"
+            allowDuplicatedCategory={false}
+          />
+          <YAxis
+            type="number"
+            dataKey={"Raw_reads_duplication"}
+            name="Number"
+          />
+          <CartesianGrid />
+          <Tooltip
+            cursor={{ strokeDasharray: "3 3" }}
+            wrapperStyle={{ zIndex: 100 }}
+            content={this.renderTooltip}
+          />
+          <Scatter
+            name="Raw_reads_duplication"
+            data={myData.data}
+            fill="#8884d8"
+          >
+            {myData.data.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />;
+            })}
+          </Scatter>
+        </ScatterChart>
+        <h1>Alignment PCR Duplication</h1>
+        <ScatterChart
+          width={1200}
+          height={400}
+          syncId="myChart"
+          margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+        >
+          <XAxis
+            type="category"
+            dataKey="Date"
+            name="Date"
+            allowDuplicatedCategory={false}
+          />
+          <YAxis
+            type="number"
+            dataKey={"Alignment_PCR_duplication"}
+            name="Number"
+          />
+          <CartesianGrid />
+          <Tooltip
+            cursor={{ strokeDasharray: "3 3" }}
+            wrapperStyle={{ zIndex: 100 }}
+            content={this.renderTooltip}
+          />
+          <Scatter
+            name="Alignment_PCR_duplication"
+            data={myData.data}
+            fill="#8884d8"
+          >
+            {myData.data.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />;
+            })}
+          </Scatter>
+          {/* <ReferenceLine y={myData.ref.dup_good} label={`Good: ${myData.ref.dup_good}`} stroke="darkgreen" />
         <ReferenceLine y={myData.ref.dup_ok} label={`Acceptable: ${myData.ref.dup_ok}`} stroke="red" /> */}
-      </ScatterChart>
-      <h1>Reads% Under Peaks</h1>
-      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
-        <YAxis type="number" dataKey={'Reads_under_peaks'} name='Number'/>
-        <CartesianGrid />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
-        <Scatter name='Reads_under_peaks' data={myData.data} fill='#8884d8'>
-          {
-            myData.data.map((entry, index) => {
-              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
-            })
-          }
-        </Scatter>
-        <ReferenceLine y={myData.ref.rup_good} label={`Good: ${myData.ref.rup_good}`} stroke="darkgreen" />
-        <ReferenceLine y={myData.ref.rup_ok} label={`Acceptable: ${myData.ref.rup_ok}`} stroke="red" />
-      </ScatterChart>
-      <h1>Enrichment in Promoters</h1>
-      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
-        <YAxis type="number" dataKey={'Enrichment_in_promoters'} name='Number'/>
-        <CartesianGrid />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
-        <Scatter name='Enrichment_in_promoters' data={myData.data} fill='#8884d8'>
-          {
-            myData.data.map((entry, index) => {
-              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
-            })
-          }
-        </Scatter>
-        <ReferenceLine y={myData.ref.enr_p_good} label={`Good: ${myData.ref.enr_p_good}`} stroke="darkgreen" />
-        <ReferenceLine y={myData.ref.enr_p_ok} label={`Acceptable: ${myData.ref.enr_p_ok}`} stroke="red" />
-      </ScatterChart>
-      <h1>Subsampled Enrichment</h1>
-      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
-        <YAxis type="number" dataKey={'Subsampled_enrichment'} name='Number'/>
-        <CartesianGrid />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
-        <Scatter name='Subsampled_enrichment' data={myData.data} fill='#8884d8'>
-          {
-            myData.data.map((entry, index) => {
-              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
-            })
-          }
-        </Scatter>
-        <ReferenceLine y={myData.ref.enr_s_good} label={`Good: ${myData.ref.enr_s_good}`} stroke="darkgreen" />
-        <ReferenceLine y={myData.ref.enr_s_ok} label={`Acceptable: ${myData.ref.enr_s_ok}`} stroke="red" />
-      </ScatterChart>
-      <h1>Background</h1>
-      <ScatterChart width={1200} height={400} syncId="myChart" margin={{ top: 20, right: 20, bottom: 20, left: 40 }}>
-        <XAxis type="category" dataKey='Date' name='Date' allowDuplicatedCategory={false} />
-        <YAxis type="number" dataKey={'Background'} name='Number'/>
-        <CartesianGrid />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} wrapperStyle={{ zIndex: 100 }} content={this.renderTooltip} />
-        <Scatter name='Background' data={myData.data} fill='#8884d8'>
-          {
-            myData.data.map((entry, index) => {
-              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />
-            })
-          }
-        </Scatter>
-        <ReferenceLine y={myData.ref.bk_good} label={`Good: ${myData.ref.bk_good}`} stroke="darkgreen" />
-        <ReferenceLine y={myData.ref.bk_ok} label={`Acceptable: ${myData.ref.bk_ok}`} stroke="red" />
-      </ScatterChart>
-      <hr/>
-      <p className="text-primary text-left font-italic">Last Update: {myData.lastupdate}</p>
+        </ScatterChart>
+        <h1>Reads% Under Peaks</h1>
+        <ScatterChart
+          width={1200}
+          height={400}
+          syncId="myChart"
+          margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+        >
+          <XAxis
+            type="category"
+            dataKey="Date"
+            name="Date"
+            allowDuplicatedCategory={false}
+          />
+          <YAxis type="number" dataKey={"Reads_under_peaks"} name="Number" />
+          <CartesianGrid />
+          <Tooltip
+            cursor={{ strokeDasharray: "3 3" }}
+            wrapperStyle={{ zIndex: 100 }}
+            content={this.renderTooltip}
+          />
+          <Scatter name="Reads_under_peaks" data={myData.data} fill="#8884d8">
+            {myData.data.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />;
+            })}
+          </Scatter>
+          <ReferenceLine
+            y={myData.ref.rup_good}
+            label={`Good: ${myData.ref.rup_good}`}
+            stroke="darkgreen"
+          />
+          <ReferenceLine
+            y={myData.ref.rup_ok}
+            label={`Acceptable: ${myData.ref.rup_ok}`}
+            stroke="red"
+          />
+        </ScatterChart>
+        <h1>Enrichment in Promoters</h1>
+        <ScatterChart
+          width={1200}
+          height={400}
+          syncId="myChart"
+          margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+        >
+          <XAxis
+            type="category"
+            dataKey="Date"
+            name="Date"
+            allowDuplicatedCategory={false}
+          />
+          <YAxis
+            type="number"
+            dataKey={"Enrichment_in_promoters"}
+            name="Number"
+          />
+          <CartesianGrid />
+          <Tooltip
+            cursor={{ strokeDasharray: "3 3" }}
+            wrapperStyle={{ zIndex: 100 }}
+            content={this.renderTooltip}
+          />
+          <Scatter
+            name="Enrichment_in_promoters"
+            data={myData.data}
+            fill="#8884d8"
+          >
+            {myData.data.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />;
+            })}
+          </Scatter>
+          <ReferenceLine
+            y={myData.ref.enr_p_good}
+            label={`Good: ${myData.ref.enr_p_good}`}
+            stroke="darkgreen"
+          />
+          <ReferenceLine
+            y={myData.ref.enr_p_ok}
+            label={`Acceptable: ${myData.ref.enr_p_ok}`}
+            stroke="red"
+          />
+        </ScatterChart>
+        <h1>Subsampled Enrichment</h1>
+        <ScatterChart
+          width={1200}
+          height={400}
+          syncId="myChart"
+          margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+        >
+          <XAxis
+            type="category"
+            dataKey="Date"
+            name="Date"
+            allowDuplicatedCategory={false}
+          />
+          <YAxis
+            type="number"
+            dataKey={"Subsampled_enrichment"}
+            name="Number"
+          />
+          <CartesianGrid />
+          <Tooltip
+            cursor={{ strokeDasharray: "3 3" }}
+            wrapperStyle={{ zIndex: 100 }}
+            content={this.renderTooltip}
+          />
+          <Scatter
+            name="Subsampled_enrichment"
+            data={myData.data}
+            fill="#8884d8"
+          >
+            {myData.data.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />;
+            })}
+          </Scatter>
+          <ReferenceLine
+            y={myData.ref.enr_s_good}
+            label={`Good: ${myData.ref.enr_s_good}`}
+            stroke="darkgreen"
+          />
+          <ReferenceLine
+            y={myData.ref.enr_s_ok}
+            label={`Acceptable: ${myData.ref.enr_s_ok}`}
+            stroke="red"
+          />
+        </ScatterChart>
+        <h1>Background</h1>
+        <ScatterChart
+          width={1200}
+          height={400}
+          syncId="myChart"
+          margin={{ top: 20, right: 20, bottom: 20, left: 40 }}
+        >
+          <XAxis
+            type="category"
+            dataKey="Date"
+            name="Date"
+            allowDuplicatedCategory={false}
+          />
+          <YAxis type="number" dataKey={"Background"} name="Number" />
+          <CartesianGrid />
+          <Tooltip
+            cursor={{ strokeDasharray: "3 3" }}
+            wrapperStyle={{ zIndex: 100 }}
+            content={this.renderTooltip}
+          />
+          <Scatter name="Background" data={myData.data} fill="#8884d8">
+            {myData.data.map((entry, index) => {
+              return <Cell key={`cell-${index}`} fill={colors[entry.Lab]} />;
+            })}
+          </Scatter>
+          <ReferenceLine
+            y={myData.ref.bk_good}
+            label={`Good: ${myData.ref.bk_good}`}
+            stroke="darkgreen"
+          />
+          <ReferenceLine
+            y={myData.ref.bk_ok}
+            label={`Acceptable: ${myData.ref.bk_ok}`}
+            stroke="red"
+          />
+        </ScatterChart>
+        <hr />
+        <p className="text-primary text-left font-italic">
+          Last Update: {myData.lastupdate}
+        </p>
       </div>
     );
   }
@@ -392,11 +663,7 @@ class App extends Component {
   render() {
     const { loading } = this.state;
 
-    return (
-      <div>
-        {loading ? this.renderLoading() : this.renderSummary()}
-      </div>
-    );
+    return <div>{loading ? this.renderLoading() : this.renderSummary()}</div>;
   }
 }
 
